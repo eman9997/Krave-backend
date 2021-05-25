@@ -4,7 +4,14 @@ import express, {
     NextFunction,
     RequestHandler
 } from "express";
+import  {Sequelize}  from 'Sequelize';
+import {createConnection, QueryError, RowDataPacket} from 'mysql2';
 import data from './routes/data';
+
+const sequelize = new Sequelize('test', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql'
+})
 
 const app = express();
 
