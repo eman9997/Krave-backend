@@ -1,0 +1,8 @@
+POST http://localhost:5000/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Martin Vera",
+    "email": "guerovera37@icloud.com",
+    "role": "admin"
+}
