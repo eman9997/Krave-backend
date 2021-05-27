@@ -4,16 +4,10 @@ import express, {
     NextFunction,
     RequestHandler
 } from "express";
-import  {Sequelize}  from 'Sequelize';
-import {createConnection, QueryError, RowDataPacket} from 'mysql2';
 import data from './routes/data';
-
-const sequelize = new Sequelize('test', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql'
-})
-
+const { sequelize, User } = require('./models')
 const app = express();
+app.use(express.json())
 
 app.use("/data", data)
 
@@ -26,3 +20,8 @@ app.listen(port, () => {
     console.log(`running on port ${port}`)
 })
 
+app.listen({ port:5000 }, async() => {
+    // Creates database tables based off the models we have.
+    await sequelize.sync({ force: true })
+    console.log("Database synced!")
+})
